@@ -1,3 +1,4 @@
+
 public class EmployeeWageCalculation
 {
 	final int isFullTime=1;
@@ -6,7 +7,7 @@ public class EmployeeWageCalculation
 	final int empRatePerHour;
 	final int maxHours;
         final int maxDays;
-	String company;
+	final String company;
 	int totalEmpWage;
 
 	public EmployeeWageCalculation(String company,int empRatePerHour,int maxDays,int maxHours) {
@@ -84,7 +85,5 @@ public class EmployeeWageCalculation
 		System.out.println("Monthly Wage of Tesla is "+Tesla.totalEmpWage);
 	}
 }
-
-
 
 
