@@ -1,6 +1,4 @@
-
 public class CompanyEmployeeWage {
-
 	public final String company;
 	public final int empRatePerHour;
 	public final int numOfWorkingDays;
@@ -23,3 +21,5 @@ public class CompanyEmployeeWage {
 		return "Total Emp Wage for Company: " +company+" is: "+totalEmpWage;
 	}
 }
+
+

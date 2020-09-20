@@ -38,6 +38,11 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 		}
 	}
 
+	@Override
+	public int getTotalWage(String company) {
+		return companyToEmpWageMap.get(company).totalEmpWage;
+	}
+
 	public int computeEmpWage(CompanyEmployeeWage CompanyEmployeeWage) {
 		int empHours=0, totalEmpHours=0, totalWorkingDays=0;
 		while(totalEmpHours<=CompanyEmployeeWage.maxHoursPerMonth && totalWorkingDays<CompanyEmployeeWage.numOfWorkingDays) {
@@ -71,6 +76,7 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 		e.addCompanyEmployeeWage("SpaceX",20,2,10);
 		e.addCompanyEmployeeWage("Tesla",10,4,20);
 		e.computeEmpWage();
+		System.out.println("total wage for SpaceX company is :"+ e.getTotalWage("SpaceX"));
 	}
 }
 
