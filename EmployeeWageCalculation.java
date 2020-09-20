@@ -2,11 +2,19 @@ public class EmployeeWageCalculation
 {
 	final int isFullTime=1;
 	final int isPartTime=2;
-	final int partTimeHours=4;
-	final int fullTimeHours=8;
-	final int empRatePerHour=20;
-	final int maxHours=100;
-        final int maxDays=20;
+
+	final int empRatePerHour;
+	final int maxHours;
+        final int maxDays;
+	String company;
+	int totalEmpWage;
+
+	public EmployeeWageCalculation(String company,int empRatePerHour,int maxDays,int maxHours) {
+		this.company=company;
+		this.empRatePerHour=empRatePerHour;
+		this.maxHours=maxHours;
+		this.maxDays=maxDays;
+	}
 
 	public int empAttendance() {
 		int empCheck=(int) Math.floor(Math.random()*10)%3;
@@ -28,6 +36,8 @@ public class EmployeeWageCalculation
 		}
 	}
 	public int daliyWage(int n) {
+		final int partTimeHours=4;
+	        final int fullTimeHours=8;
 		int empWage=0;
 		switch (n) {
 		case isFullTime:
@@ -41,7 +51,9 @@ public class EmployeeWageCalculation
 		}
 		return empWage;
 	}
-	public int monthlyWage() {
+	public void monthlyWage() {
+		final int partTimeHours=4;
+                final int fullTimeHours=8;
 		int days = 0;
 		int hours=0;
 		int monthlyWage = 0;
@@ -61,14 +73,18 @@ public class EmployeeWageCalculation
 			}
 			days++;
 		}
-		return monthlyWage;
+		this.totalEmpWage=monthlyWage;
 	}
 	public static void main(String[] args) {
-		EmployeeWageCalculation e = new EmployeeWageCalculation();
-		e.welcomeMessage();
-		System.out.println("Monthly Wage is "+e.monthlyWage()); 
+		EmployeeWageCalculation SpaceX = new EmployeeWageCalculation("SpaceX",20,20,100);
+		EmployeeWageCalculation Tesla = new EmployeeWageCalculation("Tesla",10,25,100);
+		SpaceX.monthlyWage();
+		Tesla.monthlyWage();
+		System.out.println("Monthly Wage of SpaceX is "+SpaceX.totalEmpWage); 
+		System.out.println("Monthly Wage of Tesla is "+Tesla.totalEmpWage);
 	}
 }
+
 
 
 
