@@ -1,6 +1,9 @@
+import java.util.*;
+
 public interface ImpCalculateEmpWage {
 	public void addCompanyEmployeeWage(String company, int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth);
 	public void computeEmpWage();
+
 }
 
 public class EmployeeWageCalculation implements ImpCalculateEmpWage
@@ -9,23 +12,27 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 	public static final int isPartTime=2;
 
 	private int numOfCompany=0;
-	private CompanyEmployeeWage[] CompanyEmployeeWageArray;
+	private LinkedList<CompanyEmployeeWage> CompanyEmployeeWageList;
+	private Map<String,CompanyEmployeeWage> companyToEmpWageMap;
 
 	public EmployeeWageCalculation() {
-	CompanyEmployeeWageArray= new CompanyEmployeeWage[5];
+		CompanyEmployeeWageList=new LinkedList<>();
+		companyToEmpWageMap=new HashMap<>();
 	}
 
 	public void addCompanyEmployeeWage(String company,int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
 
-		CompanyEmployeeWageArray[numOfCompany]=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
+		CompanyEmployeeWage CompanyEmployeeWage=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
 
-		numOfCompany++;
+		CompanyEmployeeWageList.add(CompanyEmployeeWage);
+		companyToEmpWageMap.put(company,CompanyEmployeeWage);
 	}
 
 	public void computeEmpWage() {
-		for (int i=0;i< numOfCompany; i++) {
-			CompanyEmployeeWageArray[i].setTotalEmpWage(this.computeEmpWage(CompanyEmployeeWageArray[i]));
-			System.out.println(CompanyEmployeeWageArray[i]);
+		for (int i=0;i<CompanyEmployeeWageList.size(); i++) {
+			CompanyEmployeeWage CompanyEmployeeWage = CompanyEmployeeWageList.get(i);
+			CompanyEmployeeWage.setTotalEmpWage(this.computeEmpWage(CompanyEmployeeWage));
+			System.out.println(CompanyEmployeeWage);
 		}
 	}
 
@@ -57,5 +64,3 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 		e.computeEmpWage();
 	}
 }
-
-
