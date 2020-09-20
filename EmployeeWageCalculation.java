@@ -3,7 +3,7 @@ import java.util.*;
 public interface ImpCalculateEmpWage {
 	public void addCompanyEmployeeWage(String company, int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth);
 	public void computeEmpWage();
-
+	public int getTotalWage(String company);
 }
 
 public class EmployeeWageCalculation implements ImpCalculateEmpWage
@@ -12,12 +12,14 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 	public static final int isPartTime=2;
 
 	private int numOfCompany=0;
+	private LinkedList<String> dailyWageList;
 	private LinkedList<CompanyEmployeeWage> CompanyEmployeeWageList;
 	private Map<String,CompanyEmployeeWage> companyToEmpWageMap;
 
 	public EmployeeWageCalculation() {
 		CompanyEmployeeWageList=new LinkedList<>();
 		companyToEmpWageMap=new HashMap<>();
+		dailyWageList=new LinkedList<>();
 	}
 
 	public void addCompanyEmployeeWage(String company,int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
@@ -51,10 +53,17 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 				default:
 					empHours=0;
 			}
+			this.dailyWageList.add(String.valueOf(empHours*CompanyEmployeeWage.empRatePerHour));
 			totalEmpHours+=empHours;
-			System.out.println("Day#: "+ totalWorkingDays+" Emp Hr: " +empHours);
 		}
+		this.getDailyWage();
 		return totalEmpHours*CompanyEmployeeWage.empRatePerHour;
+	}
+
+	public void getDailyWage() {
+		for(int i=0; i<dailyWageList.size();i++) {
+        		System.out.println("Day#: "+(i+1)+" Wage "+dailyWageList.get(i));
+        	}
 	}
 
 	public static void main(String[] args) {
@@ -64,3 +73,4 @@ public class EmployeeWageCalculation implements ImpCalculateEmpWage
 		e.computeEmpWage();
 	}
 }
+
