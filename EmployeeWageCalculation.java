@@ -1,4 +1,9 @@
-public class EmployeeWageCalculation
+public interface ImpCalculateEmpWage {
+	public void addCompanyEmployeeWage(String company, int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth);
+	public void computeEmpWage();
+}
+
+public class EmployeeWageCalculation implements ImpCalculateEmpWage
 {
 	public static final int isFullTime=1;
 	public static final int isPartTime=2;
@@ -10,21 +15,21 @@ public class EmployeeWageCalculation
 	CompanyEmployeeWageArray= new CompanyEmployeeWage[5];
 	}
 
-	private void addCompanyEmployeeWage(String company,int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
+	public void addCompanyEmployeeWage(String company,int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth) {
 
 		CompanyEmployeeWageArray[numOfCompany]=new CompanyEmployeeWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth);
 
 		numOfCompany++;
 	}
 
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		for (int i=0;i< numOfCompany; i++) {
 			CompanyEmployeeWageArray[i].setTotalEmpWage(this.computeEmpWage(CompanyEmployeeWageArray[i]));
 			System.out.println(CompanyEmployeeWageArray[i]);
 		}
 	}
 
-	private int computeEmpWage(CompanyEmployeeWage CompanyEmployeeWage) {
+	public int computeEmpWage(CompanyEmployeeWage CompanyEmployeeWage) {
 		int empHours=0, totalEmpHours=0, totalWorkingDays=0;
 		while(totalEmpHours<=CompanyEmployeeWage.maxHoursPerMonth && totalWorkingDays<CompanyEmployeeWage.numOfWorkingDays) {
 			totalWorkingDays++;
@@ -52,4 +57,5 @@ public class EmployeeWageCalculation
 		e.computeEmpWage();
 	}
 }
+
 
